@@ -1,14 +1,27 @@
-print("When running this program, it combines all the separated DDS images in the directory into whole images.\nDeveloper: ВарКомНадзор (wfom)\nLink to the group in VKontakte: https://vk.com/wf_module \nLink to the group in Telegram: https://t.me/+ASA1xbLPnIQ0ZDUy \nLink to GitHub: https://github.com/wfom \nProgram version: v0.2")
-
 import os
+
+what_remove = int(input('Delete source files (*.dds.0, *.dds.1, *.dds.2, etc.) to reduce space? Select a number and press [Enter]:\n0 - No\n1 - Yes\n\nYour choice: '))
 
 def combine_dds_files(input_dds):
     dds_null = input_dds
-    name_dds = input_dds[:-2].split("\\")[-1]
     filename = input_dds[:-2]
-    number = [16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
     files = []
-    files += [f for f in all if f.endswith(f'{name_dds}.{[n for n in number]}')]
+    files += [f for f in all if f.endswith(f'{filename}.16')]
+    files += [f for f in all if f.endswith(f'{filename}.15')]
+    files += [f for f in all if f.endswith(f'{filename}.14')]
+    files += [f for f in all if f.endswith(f'{filename}.13')]
+    files += [f for f in all if f.endswith(f'{filename}.12')]
+    files += [f for f in all if f.endswith(f'{filename}.11')]
+    files += [f for f in all if f.endswith(f'{filename}.10')]
+    files += [f for f in all if f.endswith(f'{filename}.9')]
+    files += [f for f in all if f.endswith(f'{filename}.8')]
+    files += [f for f in all if f.endswith(f'{filename}.7')]
+    files += [f for f in all if f.endswith(f'{filename}.6')]
+    files += [f for f in all if f.endswith(f'{filename}.5')]
+    files += [f for f in all if f.endswith(f'{filename}.4')]
+    files += [f for f in all if f.endswith(f'{filename}.3')]
+    files += [f for f in all if f.endswith(f'{filename}.2')]
+    files += [f for f in all if f.endswith(f'{filename}.1')]
     with open(dds_null, 'rb') as first_file:
         start = first_file.read(128)
         end = first_file.read()
@@ -20,6 +33,13 @@ def combine_dds_files(input_dds):
     with open(filename, 'wb') as outfile:
         outfile.write(data)
         print(f'Merging of the [{filename}] file has been completed successfully')
+    if what_remove == 1:
+        os.remove(dds_null)
+        for file in files:
+            try:
+                os.remove(file)
+            except:
+                None
 
 def all_files():
     all = []
